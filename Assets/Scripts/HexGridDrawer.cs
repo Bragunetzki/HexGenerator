@@ -1,16 +1,22 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(HexMaterialProvider))]
 public class HexGridDrawer : MonoBehaviour
 {
-    public HexGrid grid { get; set; }
+    public HexGrid Grid { get; set; }
     [SerializeField] private GameObject hexPrefab;
     [SerializeField] private HexMaterialProvider materialProvider;
+    [SerializeField] public float heightDiffMultiplier = 2f;
+    public readonly Dictionary<string, GameObject> FeaturePrefabs = new();
 
     public void DrawGrid()
     {
-        if (grid == null)
+        if (Grid == null)
         {
             Debug.LogError("HexGrid not assigned!");
             return;
@@ -19,51 +25,65 @@ public class HexGridDrawer : MonoBehaviour
         // delete any existing children.
         DeleteChildren(transform);
 
-        foreach (var hex in grid.GetAll())
+        foreach (var hex in Grid.GetAll())
         {
-            var hexPosition = grid.HexToWorld(hex);
-            var hexEulerRot = hexPrefab.transform.localRotation.eulerAngles;
-            var hexRotation = Quaternion.Euler(hexEulerRot.x, hexEulerRot.y + grid.GetHexOffsetRotation(),
-                hexEulerRot.z);
-
-            // Instantiate hex parent object.
-            var hexParent = new GameObject("HexParent")
-            {
-                transform =
-                {
-                    position = hexPosition
-                }
-            };
-            hexParent.transform.SetParent(transform);
-            var localScale = hexParent.transform.localScale;
-
-            // Instantiate hex object.
-            var hexObject = Instantiate(hexPrefab, hexPosition, hexRotation);
-            hexObject.transform.rotation = hexRotation;
-            hexObject.transform.SetParent(hexParent.transform);
-
-            // Change parent object scale to account for hex size and height. 
-            var hexSize = grid.GetHexSize();
-            var height = hex.Height;
-            localScale = new Vector3(localScale.x * hexSize.x, localScale.y * height,
-                localScale.z * hexSize.y);
-            hexParent.transform.localScale = localScale;
-
-            // Shift position to account for height.
-            var transformPosition = hexParent.transform.position;
-            transformPosition.y += hexObject.transform.localScale.y * localScale.y * 0.37f / 2f;
-            hexParent.transform.position = transformPosition;
-
-
-            // Set meshRenderer material depending on hex type.
-            var meshRenderer = hexObject.GetComponentInChildren<MeshRenderer>();
-            if (meshRenderer == null) continue;
-            var material = materialProvider.GetMaterialOfHex(hex);
-            meshRenderer.material = material;
+            DrawHex(hex);
         }
     }
 
-    private void DeleteChildren(Transform parent)
+    private void DrawHex(WorldHex hex)
+    {
+        var hexPosition = Grid.HexToWorld(hex);
+        var hexEulerRot = hexPrefab.transform.localRotation.eulerAngles;
+        var hexRotation = Quaternion.Euler(hexEulerRot.x, hexEulerRot.y + Grid.GetHexOffsetRotation(),
+            hexEulerRot.z);
+
+        // Instantiate parent object and set it as child of grid.
+        var parentObj = new GameObject("HexParent")
+        {
+            transform =
+            {
+                position = hexPosition,
+                parent = transform
+            }
+        };
+
+        // Instantiate hex holder object and set as child of parent.
+        var hexHolder = new GameObject("HexMeshHolder");
+        hexHolder.transform.SetParent(parentObj.transform, false);
+
+        // Instantiate hex object and set as child of hexHolder.
+        var hexObject = Instantiate(hexPrefab, Vector3.zero, hexRotation);
+        hexObject.transform.SetParent(hexHolder.transform, false);
+        hexObject.transform.rotation = hexRotation;
+
+        // Change hexHolder object scale to account for hex size and height. 
+        var hexHolderLocalScale = hexHolder.transform.localScale;
+        var hexSize = Grid.GetHexSize();
+        var height = hex.Height * heightDiffMultiplier;
+        hexHolderLocalScale = new Vector3(hexHolderLocalScale.x * hexSize.x, hexHolderLocalScale.y * height,
+            hexHolderLocalScale.z * hexSize.y);
+        hexHolder.transform.localScale = hexHolderLocalScale;
+
+        // Shift hex holder position to account for height.
+        var transformPosition = hexHolder.transform.position;
+        // 0.37 - default height of this particular hex mesh, should probably adjust to be 1.
+        var hexSurfaceOrigin = transformPosition;
+        transformPosition.y += height * 0.37f / 2f;
+        hexSurfaceOrigin.y += height * 0.37f;
+        hexHolder.transform.position = transformPosition;
+        
+        // Set meshRenderer material depending on hex type.
+        var meshRenderer = hexObject.GetComponentInChildren<MeshRenderer>();
+        if (meshRenderer is null) return;
+        var material = materialProvider.GetMaterialOfHex(hex);
+        meshRenderer.material = material;
+
+        // Draw the hex features.
+        DrawFeatures(hex, parentObj, hexSurfaceOrigin, hexSize);
+    }
+
+    private static void DeleteChildren(Transform parent)
     {
         if (!EditorApplication.isPlaying)
         {
@@ -71,7 +91,8 @@ public class HexGridDrawer : MonoBehaviour
             {
                 DestroyImmediate(parent.GetChild(i).gameObject);
             }
-            UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(UnityEngine.SceneManagement.SceneManager
+
+            EditorSceneManager.MarkSceneDirty(SceneManager
                 .GetActiveScene());
             return;
         }
@@ -79,6 +100,20 @@ public class HexGridDrawer : MonoBehaviour
         for (var i = parent.childCount - 1; i >= 0; i--)
         {
             Destroy(parent.GetChild(i).gameObject);
+        }
+    }
+
+    private void DrawFeatures(WorldHex hex, GameObject parentObject, Vector3 origin, Vector2 hexSize)
+    {
+        foreach (var featureDrawer in hex.Features.Select(FeatureDrawerFactory.GetFeatureDrawer))
+        {
+            var drawDatalist = featureDrawer.GetDrawFeatureList(hex, origin, hexSize, FeaturePrefabs);
+            foreach (var data in drawDatalist)
+            {
+                if (data.Prefab is null) continue;
+                var featureObj = Instantiate(data.Prefab, data.Position, data.Rotation, parentObject.transform);
+                featureObj.transform.localScale = data.Scale;
+            }
         }
     }
 }

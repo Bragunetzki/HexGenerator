@@ -6,9 +6,11 @@ public class HexMaterialProvider : MonoBehaviour
     [SerializeField] private Material plainsMaterial;
     [SerializeField] private Material seaMaterial;
     [SerializeField] private Material freshWaterMaterial;
-    [SerializeField] private Material desertMaterial;
+    [SerializeField] private Material sandMaterial;
     [SerializeField] private Material forestMaterial;
     [SerializeField] private Material mountainMaterial;
+    [SerializeField] private Material hillsMaterial;
+    [SerializeField] private Material snowMaterial;
     
     public Material GetMaterialOfHex(WorldHex hex)
     {
@@ -16,10 +18,11 @@ public class HexMaterialProvider : MonoBehaviour
         {
             WorldTerrainType.Plains => plainsMaterial,
             WorldTerrainType.Sea => seaMaterial,
-            WorldTerrainType.Desert => desertMaterial,
+            WorldTerrainType.Sand => sandMaterial,
             WorldTerrainType.Freshwater => freshWaterMaterial,
-            WorldTerrainType.Forest => forestMaterial,
             WorldTerrainType.Mountain => mountainMaterial,
+            WorldTerrainType.Hills => hillsMaterial,
+            WorldTerrainType.Snow => snowMaterial,
             _ => defaultHexMaterial
         };
     }

@@ -7,6 +7,9 @@ public class HexMapCreator : MonoBehaviour
     [SerializeField] private MapGenerator mapGenerator;
     [SerializeField] private HexGridDrawer hexGridDrawer;
 
+    [Header("Feature Prefabs")] [SerializeField]
+    private GameObject treePrefab;
+
     private void Awake()
     {
         if (mapGenerator == null)
@@ -30,16 +33,15 @@ public class HexMapCreator : MonoBehaviour
             Debug.LogError("hexGridDrawer not assigned!");
             return;
         }
-
-        var grid = mapGenerator.GenerateMap();
-        hexGridDrawer.grid = grid;
+        
         CreateMap();
     }
 
     public void CreateMap()
     {
         var grid = mapGenerator.GenerateMap();
-        hexGridDrawer.grid = grid;
+        hexGridDrawer.Grid = grid;
+        hexGridDrawer.FeaturePrefabs["tree"] = treePrefab;
         hexGridDrawer.DrawGrid();
     }
 }
