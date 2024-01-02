@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using WorldMapDisplay;
 
 namespace Editor
 {
