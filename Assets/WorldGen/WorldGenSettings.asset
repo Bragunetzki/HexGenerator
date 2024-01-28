@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69794c51b144de5bf5afbaaef2e6510, type: 3}
+  m_Name: WorldGenSettings
+  m_EditorClassIdentifier: 
+  mapWidth: 32
+  mapHeight: 32
+  forestation: 0.4
+  seed: 0
+  siteDensity: 0.4
+  isFlatTopped: 1
+  hexSize: {x: 1, y: 1}
+  noiseGenSettings: {fileID: 11400000, guid: 63f2d134396f8664d977de095908ddde, type: 2}
+  regions:
+  - height: 0.4
+    terrainType: 3
+  - height: 0.45
+    terrainType: 4
+  - height: 0.6
+    terrainType: 0
+  - height: 0.7
+    terrainType: 5
+  - height: 0
+    terrainType: 0
+  - height: 0.8
+    terrainType: 6
+  - height: 0.95
+    terrainType: 7
+  - height: 1
+    terrainType: 8
+  rollTables: {fileID: 11400000, guid: aec71d19472de74419050d62798c1e03, type: 2}
+  worldSpecies: []

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Hexes;
-using HexMapGeneration;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using WorldMapDisplay.Features;
+using WorldGeneration;
+using WorldGeneration.Features;
 
 namespace WorldMapDisplay
 {
@@ -44,7 +43,7 @@ namespace WorldMapDisplay
                 hexEulerRot.z);
 
             // Instantiate parent object and set it as child of grid.
-            var parentObj = new GameObject("HexParent")
+            var parentObj = new GameObject("HexParent " + hex.CoordHolder.Coords.x + " " + hex.CoordHolder.Coords.y)
             {
                 transform =
                 {
@@ -77,7 +76,7 @@ namespace WorldMapDisplay
             transformPosition.y += height * 0.37f / 2f;
             hexSurfaceOrigin.y += height * 0.37f;
             hexHolder.transform.position = transformPosition;
-        
+
             // Set meshRenderer material depending on hex type.
             var meshRenderer = hexObject.GetComponentInChildren<MeshRenderer>();
             if (meshRenderer is null) return;
@@ -110,15 +109,14 @@ namespace WorldMapDisplay
 
         private void DrawFeatures(WorldHex hex, GameObject parentObject, Vector3 origin, Vector2 hexSize)
         {
-            foreach (var featureDrawer in hex.Features.Select(FeatureDrawerFactory.GetFeatureDrawer))
+            if (hex.Feature == HexFeature.None) return;
+            var featureDrawer = FeatureGenerator.GetDrawer(hex.Feature);
+            var drawDatalist = featureDrawer.GetDrawFeatureList(hex, origin, hexSize, FeaturePrefabs);
+            foreach (var data in drawDatalist)
             {
-                var drawDatalist = featureDrawer.GetDrawFeatureList(hex, origin, hexSize, FeaturePrefabs);
-                foreach (var data in drawDatalist)
-                {
-                    if (data.Prefab is null) continue;
-                    var featureObj = Instantiate(data.Prefab, data.Position, data.Rotation, parentObject.transform);
-                    featureObj.transform.localScale = data.Scale;
-                }
+                if (data.Prefab is null) continue;
+                var featureObj = Instantiate(data.Prefab, data.Position, data.Rotation, parentObject.transform);
+                featureObj.transform.localScale = data.Scale;
             }
         }
     }

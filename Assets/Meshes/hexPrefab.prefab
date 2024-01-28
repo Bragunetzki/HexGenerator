@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: hexPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6792e0bb6ecdb1b44b66282fea808f41, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

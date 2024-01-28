@@ -1,5 +1,7 @@
-﻿using HexMapGeneration;
-using UnityEngine;
+﻿using UnityEngine;
+using WorldGeneration;
+using WorldGeneration.Features;
+using WorldGeneration.Sites;
 
 namespace WorldMapDisplay
 {
@@ -7,12 +9,13 @@ namespace WorldMapDisplay
     [RequireComponent(typeof(MapGenerator))]
     public class HexMapCreator : MonoBehaviour
     {
+        [SerializeField] private WorldGenSettings settings;
         [SerializeField] private MapGenerator mapGenerator;
         [SerializeField] private HexGridDrawer hexGridDrawer;
-
         [Header("Feature Prefabs")] [SerializeField]
         private GameObject treePrefab;
-
+        
+        
         private void Awake()
         {
             if (mapGenerator == null)
@@ -36,13 +39,23 @@ namespace WorldMapDisplay
                 Debug.LogError("hexGridDrawer not assigned!");
                 return;
             }
-        
+
             CreateMap();
         }
 
         public void CreateMap()
         {
+            settings.InitRandom();
+            settings.rollTables.InitBaseTables(settings);
+            
+            mapGenerator.SetSettings(settings);
             var grid = mapGenerator.GenerateMap();
+
+            FeatureGenerator.GenerateFeatures(grid, settings);
+
+            var siteGenerator = new HexSiteFiller();
+            siteGenerator.GenerateSites(grid, settings);
+
             hexGridDrawer.Grid = grid;
             hexGridDrawer.FeaturePrefabs["tree"] = treePrefab;
             hexGridDrawer.DrawGrid();

@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
+using WorldGeneration;
 using Random = System.Random;
 
 namespace NoiseGeneration
 {
     public static class NoiseGenerator
     {
+        public static float[,] GenerateNoiseMap(NoiseGenSettings settings, int seed)
+        {
+            return GenerateNoiseMap(settings.noiseWidth, settings.noiseHeight, seed, settings.noiseScale, settings.octaves,
+                settings.persistance, settings.lacunarity, settings.offset);
+        }
+
         public static float[,] GenerateNoiseMap(int mapWidth, int mapHeight, int seed, float scale, int octaves,
             float persistance,
             float lacunarity, Vector2 offset)

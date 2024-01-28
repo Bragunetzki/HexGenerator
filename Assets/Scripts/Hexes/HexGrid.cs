@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using HexMapGeneration;
 using UnityEngine;
+using WorldGeneration;
 
 namespace Hexes
 {
@@ -27,7 +27,7 @@ namespace Hexes
 
         public void AddHex(WorldHex hex)
         {
-            _grid[hex.Coords] = hex;
+            _grid[hex.CoordHolder] = hex;
         }
 
         public WorldHex GetHex(HexCoordinates hexCoordinates)
@@ -60,7 +60,7 @@ namespace Hexes
 
         public Vector3 HexToWorld(WorldHex hex)
         {
-            var coords2d = HexLayout.HexToPixel(hex.Coords);
+            var coords2d = HexLayout.HexToPixel(hex.CoordHolder);
             return new Vector3(coords2d.x, Origin.y, coords2d.y);
         }
 
@@ -68,8 +68,8 @@ namespace Hexes
         {
             if (_isFlatTopped)
             {
-                var w = hexRes.x * (width * 1.5f + 0.5f);
-                var h = hexRes.y * (height * Mathf.Sqrt(3) + 0.5f);
+                var w = hexRes.x * (width * 1.5f + 0.5f) * 2;
+                var h = hexRes.y * (height * Mathf.Sqrt(3) + 0.5f) * 2;
                 return new Vector2(w, h);
             }
             else

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using HexMapGeneration;
 using UnityEngine;
+using WorldGeneration;
 
 namespace WorldMapDisplay.Features
 {
