@@ -5,6 +5,7 @@
         Common,
         Uncommon,
         Rare,
-        Exotic
+        Exotic,
+        VeryCommon
     }
 }

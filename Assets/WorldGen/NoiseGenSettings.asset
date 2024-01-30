@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ba1c6fdaae4ad69c14291b365fd3ef, type: 3}
   m_Name: NoiseGenSettings
   m_EditorClassIdentifier: 
-  noiseWidth: 377
-  noiseHeight: 434
-  noiseScale: 45
+  noiseWidth: 754
+  noiseHeight: 869
+  noiseScale: 150
   octaves: 5
   persistance: 0.5
   lacunarity: 2
   offset: {x: 0, y: 0}
-  hexNoiseResolution: 5
+  hexNoiseResolution: 10

@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
+using Utility;
 using WorldGeneration.Creatures;
+using WorldGeneration.RollTables;
+using WorldGeneration.Sites.Purpose;
 using Random = System.Random;
 
 namespace WorldGeneration.Sites
@@ -10,8 +13,9 @@ namespace WorldGeneration.Sites
         private WorldHex _currentHex;
         private WorldGenSettings _currentSettings;
         private Random _random;
-
         private Site _site;
+
+        private IInhabitant _builder;
 
         public void BuildSite(WorldHex hex, WorldGenSettings settings)
         {
@@ -23,58 +27,127 @@ namespace WorldGeneration.Sites
             var isNatural = _random.Next(1, 3) == 1;
             if (isNatural)
             {
-                //BuildNatural();
+                BuildNatural();
             }
             else
             {
                 BuildConstructed();
             }
+
+            BuildHistory();
+            //PrintSite(_site, hex);
+            hex.Sites.Add(_site);
+        }
+
+        private void BuildHistory()
+        {
+            var siteHistoryGenerator = new SiteHistoryGenerator(_currentSettings);
+            siteHistoryGenerator.Generate(_site, _currentHex);
+        }
+
+        private void BuildNatural()
+        {
+            var tableHolder = _currentSettings.RollTables;
+            var siteAge = tableHolder.SiteAges.Roll(_random);
+            var sitePurpose = tableHolder.GetNaturalSitePurposeTable(_currentHex).Roll(_random);
+            _site.Age = siteAge;
+            _site.Size = tableHolder.GetSizeTable(TierGroup.High).Roll(_random);
+            _site.InitialPurpose = sitePurpose;
         }
 
         private void BuildConstructed()
         {
-            var tableHolder = _currentSettings.rollTables;
-            
+            var tableHolder = _currentSettings.RollTables;
             var siteAge = tableHolder.SiteAges.Roll(_random);
-
-            var builderTable = tableHolder.GetBuilderTable(siteAge, _currentHex.TerrainType, _currentHex.Feature, _currentHex.Climate);
-            var builderSpecies = builderTable.Roll(_random);
-            
-            var builderType = builderSpecies.isSolitary ? InhabitantType.PowerfulIndividual : tableHolder.BuilderTypes.Roll(_random);
-
-            var builderClass = tableHolder.GetClassTable(builderType, builderSpecies).Roll(_random);
-
-            var tier = tableHolder.TierTable.Roll(_random);
-            var minTier = Mathf.Max(builderSpecies.minimumTier, builderClass.minimumTier);
-            tier += minTier;
-            if (tier > 20) tier = 20;
-
-            var tierGroup = tier switch
-            {
-                <= 5 => TierGroup.Low,
-                <= 10 => TierGroup.Medium,
-                <= 15 => TierGroup.High,
-                <= 20 => TierGroup.Epic,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
+            var builder = CreatureBuilder.GenerateCreature(_currentHex, siteAge, _currentSettings, ConditionOption.RequireTrue);
+            var tierGroup = RollTableManager.TierToTierGroup(builder.Tier);
             var siteSize = tableHolder.GetSizeTable(tierGroup).Roll(_random);
+            var sitePurpose = PurposeBuilder.GeneratePurposeForCreature(builder, _currentHex, siteAge, _currentSettings);
 
-            var sitePurpose = tableHolder.GetSitePurposeTable(builderClass).Roll(_random);
+            _site.Age = siteAge;
+            _site.Size = siteSize;
+            _site.InitialPurpose = sitePurpose;
+            _site.CurrentPurpose = sitePurpose;
+            _site.Inhabitants.Add(builder);
+            _builder = builder;
+        }
 
-            // printing
-            var ageString = siteAge.ToString();
-            if (siteAge == WorldAge.Young)
-                ageString = "recent";
-
-            var typeString = builderType switch
+        public static string InhabitantString(IInhabitant inhabitant)
+        {
+            var result = " a tier " + inhabitant.Tier + " ";
+            var typeString = inhabitant.Type switch
             {
                 InhabitantType.PowerfulIndividual => "",
                 InhabitantType.CreatureGroup => "group of ",
                 _ => throw new ArgumentOutOfRangeException()
             };
+            var speciesString = inhabitant.Species.name;
+            var classString = inhabitant.Type switch
+            {
+                InhabitantType.PowerfulIndividual => inhabitant.Class.name,
+                InhabitantType.CreatureGroup => inhabitant.Class.name + "s",
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
+            if (inhabitant.Species.hasUniqueClass)
+            {
+                classString = "";
+                if (inhabitant.Type == InhabitantType.CreatureGroup)
+                    speciesString += "s";
+            }
+            else
+            {
+                speciesString += " ";
+            }
+
+            return result + typeString + speciesString + classString;
+        }
+
+        public static string PurposeString(SitePurpose purpose)
+        {
+            var result = purpose.name + ".";
+
+            switch (purpose)
+            {
+                case TemplePurpose templePurpose:
+                    result += " The temple was dedicated to " + templePurpose.worshippedDeity.name;
+                    break;
+                case MinePurpose minePurpose:
+                    result += " The mine was used to mine " + minePurpose.minedMineral;
+                    break;
+                case PrisonPurpose prisonPurpose:
+                    result += " The prison was used to imprison ";
+                    result += InhabitantString(prisonPurpose.Prisoner) + ".";
+                    break;
+            }
+
+            return result;
+        }
+
+        private void PrintSite(Site site, WorldHex hex)
+        {
+            var result = "In the ";
             
-            Debug.Log("In the " + ageString + " times, a tier " + tier + " " + typeString + builderSpecies + " " + builderClass + " built a " + siteAge + " " + sitePurpose);
+            var ageString = site.Age.ToString();
+            if (site.Age == WorldAge.Young)
+                ageString = "recent";
+            result += ageString + " times,";
+            result += " somewhere in the " + hex.Climate + " " + hex.TerrainType + ",";
+
+            if (site.InitialPurpose.isNatural)
+            {
+                result += " there was a " + site.Size + " " + site.InitialPurpose.name + ".";
+            }
+            else
+            {
+                result += InhabitantString(_builder) + " built a " + site.Size + " " + PurposeString(site.InitialPurpose);
+            }
+            Debug.Log(result);
+
+            foreach (var hEvent in site.History)
+            {
+                Debug.Log(hEvent.Narration());
+            }
         }
     }
 }

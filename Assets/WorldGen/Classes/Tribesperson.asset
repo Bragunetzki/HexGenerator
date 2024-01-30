@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e19f7f99d64b2891d84a8da79692c9, type: 3}
+  m_Name: Tribesperson
+  m_EditorClassIdentifier: 
+  baseRarity: 0
+  canBeGroup: 1
+  canBeSolitary: 0
+  minimumTier: 1
+  favoredPurposes:
+  - {fileID: 11400000, guid: 7d2fa2b522c15154795125e2c54e4857, type: 2}
+  - {fileID: 11400000, guid: 5420a266a0257ce448c93e2e453926bd, type: 2}
+  - {fileID: 11400000, guid: b6f64c6ca8062b648a8749ed32077d7c, type: 2}
+  disfavoredPurposes:
+  - {fileID: 11400000, guid: 38f3e6822c08afe4690e6ca4d8a88f59, type: 2}
+  - {fileID: 11400000, guid: ed2038b7d85c23148ba29c90ffa4aa0b, type: 2}
+  excludedPurposes:
+  - {fileID: 11400000, guid: e91878a56cf5d17419c32e82973b0e92, type: 2}
+  favoredDeities: []
+  excludedDeities: []
+  traits: 08000000

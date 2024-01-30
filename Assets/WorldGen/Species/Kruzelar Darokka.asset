@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Kruzelar Darokka
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 010000000200000003000000
+  baseRarity: 2
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  isUniqueMonster: 0
+  monsterClass: {fileID: 0}
+  favoredClasses:
+  - {fileID: 11400000, guid: 590b5bba3eb03524cbf8e95fc7266d74, type: 2}
+  - {fileID: 11400000, guid: af385649768bbe34d845e80576a77db8, type: 2}
+  - {fileID: 11400000, guid: 2a46c55e46d1d6a478e851646d297160, type: 2}
+  disfavoredClasses: []
+  excludedClasses:
+  - {fileID: 11400000, guid: ab9f2d75c22a15d46b10e2b029729443, type: 2}
+  - {fileID: 11400000, guid: 7fbbc8482617a654d8df131ff37ce864, type: 2}
+  favoredTerrain: 
+  disfavoredTerrain: 
+  excludedTerrain: 0300000002000000
+  favoredClimates: 01000000
+  disfavoredClimates: 
+  excludedClimates: 0000000002000000
+  favoredFeatures: 
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities:
+  - {fileID: 11400000, guid: 28b1611a83ae57c4c83989410ff43eb7, type: 2}
+  - {fileID: 11400000, guid: d3cc5d4ced2ae3a4f984c7b4b3c80d78, type: 2}
+  - {fileID: 11400000, guid: a7790d581e6d2c541ba311bf07bade73, type: 2}
+  - {fileID: 11400000, guid: d85ef51a827c651449ccfd3384e2fb9d, type: 2}
+  - {fileID: 11400000, guid: 4325c2e99d772e74bb8eea5862ff7566, type: 2}
+  - {fileID: 11400000, guid: 49e8efd1c5d32c34db708fe366ce24d5, type: 2}
+  excludedDeities: []
+  minimumTier: 1

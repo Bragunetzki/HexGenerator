@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using WorldGeneration;
 using WorldGeneration.Features;
+using WorldGeneration.RollTables;
 using WorldGeneration.Sites;
 
 namespace WorldMapDisplay
@@ -14,8 +15,7 @@ namespace WorldMapDisplay
         [SerializeField] private HexGridDrawer hexGridDrawer;
         [Header("Feature Prefabs")] [SerializeField]
         private GameObject treePrefab;
-        
-        
+
         private void Awake()
         {
             if (mapGenerator == null)
@@ -46,7 +46,7 @@ namespace WorldMapDisplay
         public void CreateMap()
         {
             settings.InitRandom();
-            settings.rollTables.InitBaseTables(settings);
+            settings.RollTables = new RollTableManager(settings);
             
             mapGenerator.SetSettings(settings);
             var grid = mapGenerator.GenerateMap();

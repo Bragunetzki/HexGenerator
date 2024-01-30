@@ -10,7 +10,7 @@ namespace WorldGeneration
         public readonly HexCoordinates CoordHolder;
         public WorldTerrainType TerrainType;
         public HexFeature Feature;
-        public WorldClimateType Climate;
+        public readonly WorldClimateType Climate;
         public readonly List<Site> Sites;
         public float Height;
         public WorldHex(int q, int r, WorldTerrainType terrain = WorldTerrainType.Plains, WorldClimateType climate = WorldClimateType.Temperate, float height = 0.5f)
@@ -21,6 +21,11 @@ namespace WorldGeneration
             Feature = HexFeature.None;
             Climate = climate;
             Sites = new List<Site>();
+        }
+
+        public bool IsAquatic()
+        {
+            return TerrainType is WorldTerrainType.Freshwater or WorldTerrainType.Sea;
         }
     }
 

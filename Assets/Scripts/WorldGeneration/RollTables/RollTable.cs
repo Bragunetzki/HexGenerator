@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using UnityEngine;
+using Random = System.Random;
 
 namespace WorldGeneration.RollTables
 {
@@ -47,8 +48,8 @@ namespace WorldGeneration.RollTables
             var filteredEntries = Entries.Where(entry => _filters.All(filter => filter(entry.Value))).ToList();
 
             var totalWeight = filteredEntries.Sum(entry => entry.Weight);
-            var roll = random.Next(totalWeight);
-            foreach (var entry in Entries)
+            var roll = random.Next(totalWeight + 1);
+            foreach (var entry in filteredEntries)
             {
                 roll -= entry.Weight;
                 if (roll <= 0)

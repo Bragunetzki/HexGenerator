@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Orc
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 010000000200000003000000
+  baseRarity: 1
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  isUniqueMonster: 0
+  monsterClass: {fileID: 0}
+  favoredClasses:
+  - {fileID: 11400000, guid: eb340fa27472b5746bddf677809ec670, type: 2}
+  - {fileID: 11400000, guid: 7fbbc8482617a654d8df131ff37ce864, type: 2}
+  - {fileID: 11400000, guid: b04e0d536b337cc449f705fd46da9e49, type: 2}
+  - {fileID: 11400000, guid: b69d1000152031949940aaec02138d5e, type: 2}
+  - {fileID: 11400000, guid: f786c1a47896f5247913fc7e1172fcae, type: 2}
+  disfavoredClasses: []
+  excludedClasses: []
+  favoredTerrain: 
+  disfavoredTerrain: 
+  excludedTerrain: 
+  favoredClimates: 
+  disfavoredClimates: 
+  excludedClimates: 
+  favoredFeatures: 
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities:
+  - {fileID: 11400000, guid: 3bf7cd635b87e7c4a92544d5c749aa59, type: 2}
+  - {fileID: 11400000, guid: d3cc5d4ced2ae3a4f984c7b4b3c80d78, type: 2}
+  - {fileID: 11400000, guid: a7790d581e6d2c541ba311bf07bade73, type: 2}
+  excludedDeities: []
+  minimumTier: 1

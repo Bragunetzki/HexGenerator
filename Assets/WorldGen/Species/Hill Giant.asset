@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Hill Giant
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 010000000200000003000000
+  baseRarity: 1
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  isUniqueMonster: 0
+  monsterClass: {fileID: 0}
+  favoredClasses:
+  - {fileID: 11400000, guid: ab9f2d75c22a15d46b10e2b029729443, type: 2}
+  - {fileID: 11400000, guid: 7fbbc8482617a654d8df131ff37ce864, type: 2}
+  - {fileID: 11400000, guid: 444fdff0af9048c468de40ab14f12fca, type: 2}
+  - {fileID: 11400000, guid: eb340fa27472b5746bddf677809ec670, type: 2}
+  disfavoredClasses:
+  - {fileID: 11400000, guid: af385649768bbe34d845e80576a77db8, type: 2}
+  - {fileID: 11400000, guid: b634a588b2a7b1f4ea334e2c2b58bd71, type: 2}
+  excludedClasses:
+  - {fileID: 11400000, guid: 2a46c55e46d1d6a478e851646d297160, type: 2}
+  - {fileID: 11400000, guid: 23d3a7bb8a846554d86cd4d9ea3f97ea, type: 2}
+  - {fileID: 11400000, guid: e87a698006aa5df4d9178f6b6c41b686, type: 2}
+  - {fileID: 11400000, guid: bfb433d17a70a1b43b3d10519f52d253, type: 2}
+  - {fileID: 11400000, guid: 590b5bba3eb03524cbf8e95fc7266d74, type: 2}
+  - {fileID: 11400000, guid: 665e3c62b1e084c4b8867e10d3cdad42, type: 2}
+  - {fileID: 11400000, guid: bf06b3de3755ac2459935ff25842aabe, type: 2}
+  favoredTerrain: 05000000
+  disfavoredTerrain: 0600000000000000
+  excludedTerrain: 030000000400000002000000080000000700000001000000
+  favoredClimates: 
+  disfavoredClimates: 
+  excludedClimates: 
+  favoredFeatures: 
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities: []
+  excludedDeities:
+  - {fileID: 11400000, guid: 4325c2e99d772e74bb8eea5862ff7566, type: 2}
+  - {fileID: 11400000, guid: 9a020c6a479bd3345a1ca1ffd79d51c7, type: 2}
+  - {fileID: 11400000, guid: 5256c70912e668f49a2a0d08a0ea4b8d, type: 2}
+  - {fileID: 11400000, guid: 01cc660cf2649d04caea37dc8758b5f5, type: 2}
+  - {fileID: 11400000, guid: 551a374a3829674479f3514073ea0d32, type: 2}
+  - {fileID: 11400000, guid: d85ef51a827c651449ccfd3384e2fb9d, type: 2}
+  - {fileID: 11400000, guid: 4cb069c48d92cab4f8a273a0ae3dc76a, type: 2}
+  - {fileID: 11400000, guid: a7790d581e6d2c541ba311bf07bade73, type: 2}
+  - {fileID: 11400000, guid: 311b9d157e54ed04c85c311cb2f01443, type: 2}
+  - {fileID: 11400000, guid: 08b8deb3f20ce82408adf785ea1bbc0d, type: 2}
+  - {fileID: 11400000, guid: d3cc5d4ced2ae3a4f984c7b4b3c80d78, type: 2}
+  - {fileID: 11400000, guid: 592da6ca74651d94b827fd9cfad0ba2a, type: 2}
+  - {fileID: 11400000, guid: 1d1fcace0e1b54a43854ab92af9a387f, type: 2}
+  - {fileID: 11400000, guid: 0750d49c2c26a5445b1e64c093c0dabc, type: 2}
+  minimumTier: 7

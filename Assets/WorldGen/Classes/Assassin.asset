@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38e19f7f99d64b2891d84a8da79692c9, type: 3}
+  m_Name: Assassin
+  m_EditorClassIdentifier: 
+  baseRarity: 2
+  canBeGroup: 1
+  canBeSolitary: 1
+  minimumTier: 8
+  favoredPurposes: []
+  disfavoredPurposes:
+  - {fileID: 11400000, guid: 884e7fa12eefa254aad9f0a3438a43af, type: 2}
+  excludedPurposes:
+  - {fileID: 11400000, guid: 7d2fa2b522c15154795125e2c54e4857, type: 2}
+  - {fileID: 11400000, guid: 80dfe5997f00bae42b9eb5916705c4cf, type: 2}
+  - {fileID: 11400000, guid: e91878a56cf5d17419c32e82973b0e92, type: 2}
+  - {fileID: 11400000, guid: 38f3e6822c08afe4690e6ca4d8a88f59, type: 2}
+  favoredDeities:
+  - {fileID: 11400000, guid: ad455398462628a498810f382d09d815, type: 2}
+  - {fileID: 11400000, guid: 28b1611a83ae57c4c83989410ff43eb7, type: 2}
+  excludedDeities: []

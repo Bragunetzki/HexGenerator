@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 using WorldGeneration.Creatures;
 using WorldGeneration.Features;
 using WorldGeneration.RollTables;
 using WorldGeneration.Sites;
+using WorldGeneration.Sites.Purpose;
 using Random = System.Random;
 
 namespace WorldGeneration
@@ -21,20 +24,34 @@ namespace WorldGeneration
         public Vector2 hexSize;
         public NoiseGenSettings noiseGenSettings;
         public TerrainHeight[] regions;
-        public RollTableHolder rollTables;
+        public RollTableManager RollTables;
 
-        public CreatureSpecies[] worldSpecies;
-        public CreatureClass[] possibleClasses;
-        public SitePurpose[] possibleSitePurposes;
+        public CreatureSpecies[] rollableSpecies = {};
+        public SerializableSpeciesDictionary speciesDictionary;
+        public SerializablePurposeDictionary purposeDictionary;
+        public CreatureClass[] possibleClasses = {};
+        public SitePurpose[] possibleSitePurposes = {};
+        public Deity[] worldDeities = { };
+
 
         public void InitRandom()
         {
             Random = new Random(seed);
         }
-        
+
         public readonly List<IHexFeatureGeneration> PossibleNaturalFeatures = new()
         {
             new ForestFeatureGeneration()
         };
+    }
+    
+    [Serializable]
+    public class SerializableSpeciesDictionary : SerializableDictionary<string, CreatureSpecies>
+    {
+    }
+    
+    [Serializable]
+    public class SerializablePurposeDictionary : SerializableDictionary<string, SitePurpose>
+    {
     }
 }

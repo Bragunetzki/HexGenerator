@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Hexes;
 using WorldGeneration.History;
+using WorldGeneration.History.Event;
 
 namespace WorldGeneration.Factions
 {
@@ -15,7 +16,7 @@ namespace WorldGeneration.Factions
 
         public HashSet<FactionTrait> Traits { get; private set; }
         
-        public List<HistoryEvent> History { get; private set; }
+        public List<IHistoryEvent> History { get; private set; }
 
         //public List<Role> Roles { get; private set; }
         

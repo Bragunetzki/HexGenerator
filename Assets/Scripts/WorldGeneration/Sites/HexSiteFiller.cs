@@ -4,9 +4,11 @@ namespace WorldGeneration.Sites
 {
     public class HexSiteFiller
     {
+        private SiteBuilder _builder = new SiteBuilder();
 
         public void GenerateSites(HexGrid grid, WorldGenSettings genSettings)
         {
+            _builder = new SiteBuilder();
             foreach (var hex in grid.GetAll())
             {
                 GenerateSitesForHex(hex, genSettings);
@@ -19,8 +21,7 @@ namespace WorldGeneration.Sites
             if (random.NextDouble() >= settings.siteDensity)
                 return;
 
-            var builder = new SiteBuilder();
-            builder.BuildSite(hex, settings);
+            _builder.BuildSite(hex, settings);
         }
 
         

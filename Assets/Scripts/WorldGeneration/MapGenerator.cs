@@ -89,7 +89,7 @@ namespace WorldGeneration
                 if (worldHex == null) continue;
                 worldHex.Height = hexHeights[coords];
                 worldHex.TerrainType = InterpretTerrainType(worldHex.Height);
-                if (worldHex.TerrainType == WorldTerrainType.Sea) worldHex.Height = 0.39f;
+                if (worldHex.TerrainType == WorldTerrainType.Freshwater) worldHex.Height = 0.39f;
             }
 
             return grid;

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Torricke
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 010000000200000003000000
+  baseRarity: 2
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  isUniqueMonster: 0
+  monsterClass: {fileID: 0}
+  favoredClasses: []
+  disfavoredClasses: []
+  excludedClasses: []
+  favoredTerrain: 0600000007000000
+  disfavoredTerrain: 
+  excludedTerrain: 0300000002000000
+  favoredClimates: 02000000
+  disfavoredClimates: 
+  excludedClimates: 
+  favoredFeatures: 
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities:
+  - {fileID: 11400000, guid: 3bf7cd635b87e7c4a92544d5c749aa59, type: 2}
+  - {fileID: 11400000, guid: d3cc5d4ced2ae3a4f984c7b4b3c80d78, type: 2}
+  excludedDeities: []
+  minimumTier: 1

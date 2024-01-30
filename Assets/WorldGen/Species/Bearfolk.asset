@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Bearfolk
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 010000000200000003000000
+  baseRarity: 1
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  isUniqueMonster: 0
+  monsterClass: {fileID: 0}
+  favoredClasses:
+  - {fileID: 11400000, guid: b69d1000152031949940aaec02138d5e, type: 2}
+  - {fileID: 11400000, guid: eb340fa27472b5746bddf677809ec670, type: 2}
+  - {fileID: 11400000, guid: 665e3c62b1e084c4b8867e10d3cdad42, type: 2}
+  disfavoredClasses: []
+  excludedClasses: []
+  favoredTerrain: 
+  disfavoredTerrain: 
+  excludedTerrain: 030000000200000001000000
+  favoredClimates: 
+  disfavoredClimates: 
+  excludedClimates: 02000000
+  favoredFeatures: 01000000
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities:
+  - {fileID: 11400000, guid: 0750d49c2c26a5445b1e64c093c0dabc, type: 2}
+  excludedDeities: []
+  minimumTier: 1

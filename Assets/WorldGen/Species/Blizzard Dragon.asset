@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c695213f1d4023978b420779e45e6b, type: 3}
+  m_Name: Blizzard Dragon
+  m_EditorClassIdentifier: 
+  isIntelligent: 1
+  existsIn: 00000000010000000200000003000000
+  baseRarity: 2
+  isAlwaysSolitary: 0
+  isAlwaysGroup: 0
+  traits: 09000000
+  uniqueClass: {fileID: 11400000, guid: e225ee267ea8ef647a10d77e1d940215, type: 2}
+  hasUniqueClass: 1
+  favoredClasses: []
+  disfavoredClasses: []
+  excludedClasses: []
+  favoredTerrain: 
+  disfavoredTerrain: 
+  excludedTerrain: 01000000030000000200000004000000
+  favoredClimates: 01000000
+  disfavoredClimates: 00000000
+  excludedClimates: 02000000
+  favoredFeatures: 
+  disfavoredFeatures: 
+  excludedFeatures: 
+  favoredDeities:
+  - {fileID: 11400000, guid: 311b9d157e54ed04c85c311cb2f01443, type: 2}
+  - {fileID: 11400000, guid: 49e8efd1c5d32c34db708fe366ce24d5, type: 2}
+  excludedDeities:
+  - {fileID: 11400000, guid: 0750d49c2c26a5445b1e64c093c0dabc, type: 2}
+  - {fileID: 11400000, guid: 1d1fcace0e1b54a43854ab92af9a387f, type: 2}
+  - {fileID: 11400000, guid: 592da6ca74651d94b827fd9cfad0ba2a, type: 2}
+  - {fileID: 11400000, guid: 08b8deb3f20ce82408adf785ea1bbc0d, type: 2}
+  - {fileID: 11400000, guid: a7790d581e6d2c541ba311bf07bade73, type: 2}
+  - {fileID: 11400000, guid: 4cb069c48d92cab4f8a273a0ae3dc76a, type: 2}
+  - {fileID: 11400000, guid: 551a374a3829674479f3514073ea0d32, type: 2}
+  - {fileID: 11400000, guid: 3bf7cd635b87e7c4a92544d5c749aa59, type: 2}
+  - {fileID: 11400000, guid: 5b3c13ddf43d78b4698635c0f3a8f829, type: 2}
+  - {fileID: 11400000, guid: 01cc660cf2649d04caea37dc8758b5f5, type: 2}
+  - {fileID: 11400000, guid: 5256c70912e668f49a2a0d08a0ea4b8d, type: 2}
+  - {fileID: 11400000, guid: 9a020c6a479bd3345a1ca1ffd79d51c7, type: 2}
+  minimumTier: 8
