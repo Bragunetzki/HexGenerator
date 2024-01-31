@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b69794c51b144de5bf5afbaaef2e6510, type: 3}
   m_Name: WorldGenSettings
   m_EditorClassIdentifier: 
-  mapWidth: 32
-  mapHeight: 32
+  mapWidth: 6
+  mapHeight: 6
   forestation: 0.4
   seed: 0
   siteDensity: 0.3

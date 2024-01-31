@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using WorldGeneration;
 
@@ -35,32 +36,52 @@ namespace Hexes
             return _grid.TryGetValue(hexCoordinates, out var worldHex) ? worldHex : null;
         }
 
-        public WorldHex NeighborOf(HexCoordinates hexCoordinates, int direction)
+        public WorldHex NeighborOf(WorldHex hex, int direction)
         {
-            var neighborCoords = hexCoordinates.Neighbor(direction);
-            return GetHex(neighborCoords);
+            var neighborCoords = hex.CoordHolder.Neighbor(direction);
+            _grid.TryGetValue(neighborCoords, out var result);
+            return result;
         }
 
-        public List<WorldHex> NeighborsOf(HexCoordinates hexCoordinates)
+        public List<WorldHex> NeighborsOf(WorldHex hexCoordinates)
         {
             var neighbors = new List<WorldHex>();
             for (var direction = 0; direction < 6; direction++)
             {
                 neighbors.Add(NeighborOf(hexCoordinates, direction));
             }
-
             return neighbors;
         }
 
-        public List<WorldHex> GetAll()
+        public List<WorldHex> AllHexes()
         {
             var valuesList = new List<WorldHex>(_grid.Values);
             return valuesList;
         }
 
+        // Returns the global coordinates of the hex.
         public Vector3 HexToWorld(WorldHex hex)
         {
-            var coords2d = HexLayout.HexToPixel(hex.CoordHolder);
+            var coords2d = HexLayout.HexToCoords2D(hex.CoordHolder);
+            return new Vector3(coords2d.x, Origin.y, coords2d.y);
+        }
+
+        public WorldHex WorldToHex(Vector3 hex)
+        {
+            var hexCoords = HexLayout.CoordsToHex(new Vector2(hex.x, hex.z)).HexRound();
+            return GetHex(hexCoords);
+        }
+        
+        // Returns the local coordinates of the hex.
+        public Vector3 HexToLocalOffset(WorldHex hex)
+        {
+            var coords2d = HexLayout.HexToLocalCoords2D(hex.CoordHolder);
+            return new Vector3(coords2d.x, Origin.y, coords2d.y);
+        }
+        
+        public Vector3 HexToLocalOffset(HexCoordinates coords)
+        {
+            var coords2d = HexLayout.HexToLocalCoords2D(coords);
             return new Vector3(coords2d.x, Origin.y, coords2d.y);
         }
 

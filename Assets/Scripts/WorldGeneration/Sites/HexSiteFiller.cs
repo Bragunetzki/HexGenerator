@@ -9,7 +9,7 @@ namespace WorldGeneration.Sites
         public void GenerateSites(HexGrid grid, WorldGenSettings genSettings)
         {
             _builder = new SiteBuilder();
-            foreach (var hex in grid.GetAll())
+            foreach (var hex in grid.AllHexes())
             {
                 GenerateSitesForHex(hex, genSettings);
             }

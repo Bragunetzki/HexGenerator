@@ -14,7 +14,7 @@ namespace WorldGeneration.Features
 
         public static void GenerateFeatures(HexGrid grid, WorldGenSettings genSettings)
         {
-            foreach (var hex in grid.GetAll())
+            foreach (var hex in grid.AllHexes())
             {
                 GenerateFeaturesForHex(hex, genSettings, genSettings.PossibleNaturalFeatures);
             }

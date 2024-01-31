@@ -5,7 +5,6 @@ using Utility;
 using WorldGeneration.Creatures;
 using WorldGeneration.Features;
 using WorldGeneration.RollTables;
-using WorldGeneration.Sites;
 using WorldGeneration.Sites.Purpose;
 using Random = System.Random;
 

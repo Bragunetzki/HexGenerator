@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-namespace Hexes
+namespace WorldMapDisplay
 {
     public class HexCell : MonoBehaviour
     {
-        
+        public Color color;
     }
 }

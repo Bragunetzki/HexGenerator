@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Hexes
 {
+    [Serializable]
     public readonly struct HexCoordinates
     {
         public readonly Vector3Int Coords;
@@ -259,12 +260,12 @@ namespace Hexes
         public static Orientation Pointy = new Orientation(
             new[,] { { Mathf.Sqrt(3f), Mathf.Sqrt(3f) / 2f }, { 0, 3f / 2f } },
             new[,] { { 1f / Mathf.Sqrt(3f), -1f / 3f }, { 0, 2f / 3f } },
-            0);
+            0.5f);
 
         public static Orientation Flat = new Orientation(
             new[,] { { 3f / 2f, 0 }, { Mathf.Sqrt(3f) / 2f, Mathf.Sqrt(3) } },
             new[,] { { 2f / 3f, 0 }, { -1f / 3f, 1f / Mathf.Sqrt(3f) } },
-            0.5f);
+            0f);
 
         public readonly Orientation Orientation;
 
@@ -272,15 +273,23 @@ namespace Hexes
 
         public readonly Vector2 Origin;
 
-        public readonly Vector2 HexToPixel(HexCoordinates h)
+        public readonly Vector2 HexToCoords2D(HexCoordinates h)
         {
             var m = Orientation;
             var x = (m.Forward[0, 0] * h.Coords.x + m.Forward[0, 1] * h.Coords.y) * Size.x;
             var y = (m.Forward[1, 0] * h.Coords.x + m.Forward[1, 1] * h.Coords.y) * Size.y;
             return new Vector2(Origin.x + x, Origin.y + y);
         }
+        
+        public readonly Vector2 HexToLocalCoords2D(HexCoordinates h)
+        {
+            var m = Orientation;
+            var x = (m.Forward[0, 0] * h.Coords.x + m.Forward[0, 1] * h.Coords.y) * Size.x;
+            var y = (m.Forward[1, 0] * h.Coords.x + m.Forward[1, 1] * h.Coords.y) * Size.y;
+            return new Vector2(x, y);
+        }
 
-        public readonly FractionalHex PixelToHex(Vector2 p)
+        public readonly FractionalHex CoordsToHex(Vector2 p)
         {
             var m = Orientation;
             var pt = new Vector2((p.x - Origin.x) / Size.x, (p.y - Origin.y) / Size.y);
@@ -289,10 +298,10 @@ namespace Hexes
             return new FractionalHex(q, r);
         }
 
-        public Vector2 HexCornerOffset(int corner)
+        private readonly Vector2 HexCornerOffset(int corner)
         {
             var m = Orientation;
-            var angle = 2f * Mathf.PI * (m.StartAngle - corner) / 6f;
+            var angle = 2f * Mathf.PI * (m.StartAngle - corner + 1) / 6f;
             return new Vector2(Size.x * Mathf.Cos(angle), Size.y * Mathf.Sin(angle));
         }
 
@@ -301,14 +310,14 @@ namespace Hexes
             return Orientation.StartAngle * 60;
         }
 
-        public List<Vector2> PolygonCorners(HexCoordinates h)
+        public readonly List<Vector3> PolygonCorners(HexCoordinates h, float scale = 1)
         {
-            var corners = new List<Vector2>();
-            var center = HexToPixel(h);
+            var corners = new List<Vector3>();
+            var center = HexToLocalCoords2D(h);
             for (var i = 0; i < 6; i++)
             {
                 var offset = HexCornerOffset(i);
-                corners.Add(center + offset);
+                corners.Add(new Vector3(center.x + offset.x * scale, 0, center.y + offset.y * scale));
             }
 
             return corners;

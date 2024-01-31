@@ -10,26 +10,27 @@ using WorldGeneration.Features;
 namespace WorldMapDisplay
 {
     [RequireComponent(typeof(HexMaterialProvider))]
-    public class HexGridDrawer : MonoBehaviour
+    public class ColumnHexGridDrawer : MonoBehaviour, IHexGridDrawer
     {
-        public HexGrid Grid { get; set; }
+        private HexGrid _grid;
         [SerializeField] private GameObject hexPrefab;
         [SerializeField] private HexMaterialProvider materialProvider;
         [SerializeField] public float heightDiffMultiplier = 2f;
         public readonly Dictionary<string, GameObject> FeaturePrefabs = new();
 
-        public void DrawGrid()
+        public void DrawGrid(HexGrid grid)
         {
-            if (Grid == null)
+            if (grid == null)
             {
-                Debug.LogError("HexGrid not assigned!");
                 return;
             }
+
+            _grid = grid;
 
             // delete any existing children.
             DeleteChildren(transform);
 
-            foreach (var hex in Grid.GetAll())
+            foreach (var hex in grid.AllHexes())
             {
                 DrawHex(hex);
             }
@@ -37,9 +38,9 @@ namespace WorldMapDisplay
 
         private void DrawHex(WorldHex hex)
         {
-            var hexPosition = Grid.HexToWorld(hex);
+            var hexPosition = _grid.HexToWorld(hex);
             var hexEulerRot = hexPrefab.transform.localRotation.eulerAngles;
-            var hexRotation = Quaternion.Euler(hexEulerRot.x, hexEulerRot.y + Grid.GetHexOffsetRotation(),
+            var hexRotation = Quaternion.Euler(hexEulerRot.x, hexEulerRot.y + _grid.GetHexOffsetRotation(),
                 hexEulerRot.z);
 
             // Instantiate parent object and set it as child of grid.
@@ -63,7 +64,7 @@ namespace WorldMapDisplay
 
             // Change hexHolder object scale to account for hex size and height. 
             var hexHolderLocalScale = hexHolder.transform.localScale;
-            var hexSize = Grid.GetHexSize();
+            var hexSize = _grid.GetHexSize();
             var height = hex.Height * heightDiffMultiplier;
             hexHolderLocalScale = new Vector3(hexHolderLocalScale.x * hexSize.x, hexHolderLocalScale.y * height,
                 hexHolderLocalScale.z * hexSize.y);

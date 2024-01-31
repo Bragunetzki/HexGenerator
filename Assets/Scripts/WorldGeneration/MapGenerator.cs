@@ -21,7 +21,6 @@ namespace WorldGeneration
         {
             if (_settings is null)
             {
-                Debug.LogError("World Gen Settings not set!");
                 return null;
             }
             
@@ -64,7 +63,7 @@ namespace WorldGeneration
                     var gridOrigin = grid.Origin;
                     var noise2DCoordinates = new Vector2(gridOrigin.x + x * hexSize.x / hexNoiseResolution,
                         gridOrigin.z + y * hexSize.y / hexNoiseResolution);
-                    var hexCoords = grid.HexLayout.PixelToHex(noise2DCoordinates).HexRound();
+                    var hexCoords = grid.HexLayout.CoordsToHex(noise2DCoordinates).HexRound();
 
                     // accumulate the heights.
                     if (!hexHeights.ContainsKey(hexCoords))

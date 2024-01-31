@@ -6,16 +6,17 @@ using WorldGeneration.Sites;
 
 namespace WorldMapDisplay
 {
-    [RequireComponent(typeof(HexGridDrawer))]
+    [RequireComponent(typeof(PlaneHexMapDrawer))]
     [RequireComponent(typeof(MapGenerator))]
     public class HexMapCreator : MonoBehaviour
     {
         [SerializeField] private WorldGenSettings settings;
         [SerializeField] private MapGenerator mapGenerator;
-        [SerializeField] private HexGridDrawer hexGridDrawer;
+        [SerializeField] private PlaneHexMapDrawer hexGridDrawer;
+        
         [Header("Feature Prefabs")] [SerializeField]
         private GameObject treePrefab;
-
+        
         private void Awake()
         {
             if (mapGenerator == null)
@@ -25,7 +26,7 @@ namespace WorldMapDisplay
 
             if (hexGridDrawer == null)
             {
-                hexGridDrawer = GetComponent<HexGridDrawer>();
+                hexGridDrawer = GetComponent<PlaneHexMapDrawer>();
             }
 
             if (mapGenerator == null)
@@ -56,9 +57,7 @@ namespace WorldMapDisplay
             var siteGenerator = new HexSiteFiller();
             siteGenerator.GenerateSites(grid, settings);
 
-            hexGridDrawer.Grid = grid;
-            hexGridDrawer.FeaturePrefabs["tree"] = treePrefab;
-            hexGridDrawer.DrawGrid();
+            hexGridDrawer.DrawGrid(grid);
         }
     }
 }
