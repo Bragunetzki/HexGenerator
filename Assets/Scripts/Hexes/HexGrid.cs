@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using WorldGeneration;
 
@@ -17,7 +16,7 @@ namespace Hexes
             _grid = new Dictionary<HexCoordinates, WorldHex>();
             var orientation = isFlatTopped ? HexLayout.Flat : HexLayout.Pointy;
             _isFlatTopped = isFlatTopped;
-            HexLayout = new HexLayout(orientation, hexSize, new Vector2(origin.x, origin.z));
+            HexLayout = new HexLayout(orientation, hexSize, origin);
             Origin = origin;
         }
 
@@ -62,27 +61,24 @@ namespace Hexes
         // Returns the global coordinates of the hex.
         public Vector3 HexToWorld(WorldHex hex)
         {
-            var coords2d = HexLayout.HexToCoords2D(hex.CoordHolder);
-            return new Vector3(coords2d.x, Origin.y, coords2d.y);
+            return HexLayout.HexToCoords(hex.CoordHolder);
         }
 
-        public WorldHex WorldToHex(Vector3 hex)
+        public WorldHex WorldToHex(Vector3 v)
         {
-            var hexCoords = HexLayout.CoordsToHex(new Vector2(hex.x, hex.z)).HexRound();
+            var hexCoords = HexLayout.CoordsToHex(v).HexRound();
             return GetHex(hexCoords);
         }
         
         // Returns the local coordinates of the hex.
         public Vector3 HexToLocalOffset(WorldHex hex)
         {
-            var coords2d = HexLayout.HexToLocalCoords2D(hex.CoordHolder);
-            return new Vector3(coords2d.x, Origin.y, coords2d.y);
+            return HexLayout.HexToLocalCoords(hex.CoordHolder);
         }
         
         public Vector3 HexToLocalOffset(HexCoordinates coords)
         {
-            var coords2d = HexLayout.HexToLocalCoords2D(coords);
-            return new Vector3(coords2d.x, Origin.y, coords2d.y);
+            return HexLayout.HexToLocalCoords(coords);
         }
 
         public Vector2 RectangularGridSize(int width, int height, Vector2 hexRes)

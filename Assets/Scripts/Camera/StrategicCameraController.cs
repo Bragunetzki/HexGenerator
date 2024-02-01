@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace Camera
@@ -114,6 +115,7 @@ namespace Camera
         private void HandleMousePressInput()
         {
             if (!_playerInputActions.PlayerCamera.MousePress.IsPressed()) return;
+            if (EventSystem.current.IsPointerOverGameObject()) return;
             var plane = new Plane(Vector3.up, Vector3.zero);
             var ray = controlledCamera.ScreenPointToRay(Input.mousePosition);
             if (!plane.Raycast(ray, out var entry)) return;

@@ -250,7 +250,7 @@ namespace Hexes
 
     public struct HexLayout
     {
-        public HexLayout(Orientation orientation, Vector2 size, Vector2 origin)
+        public HexLayout(Orientation orientation, Vector2 size, Vector3 origin)
         {
             Orientation = orientation;
             Size = size;
@@ -271,28 +271,28 @@ namespace Hexes
 
         public readonly Vector2 Size;
 
-        public readonly Vector2 Origin;
+        public readonly Vector3 Origin;
 
-        public readonly Vector2 HexToCoords2D(HexCoordinates h)
+        public readonly Vector3 HexToCoords(HexCoordinates h)
         {
             var m = Orientation;
             var x = (m.Forward[0, 0] * h.Coords.x + m.Forward[0, 1] * h.Coords.y) * Size.x;
             var y = (m.Forward[1, 0] * h.Coords.x + m.Forward[1, 1] * h.Coords.y) * Size.y;
-            return new Vector2(Origin.x + x, Origin.y + y);
+            return new Vector3(Origin.x + x, Origin.y, Origin.z + y);
         }
-        
-        public readonly Vector2 HexToLocalCoords2D(HexCoordinates h)
+
+        public readonly Vector3 HexToLocalCoords(HexCoordinates h, float elevation = 0)
         {
             var m = Orientation;
             var x = (m.Forward[0, 0] * h.Coords.x + m.Forward[0, 1] * h.Coords.y) * Size.x;
             var y = (m.Forward[1, 0] * h.Coords.x + m.Forward[1, 1] * h.Coords.y) * Size.y;
-            return new Vector2(x, y);
+            return new Vector3(x, elevation, y);
         }
 
-        public readonly FractionalHex CoordsToHex(Vector2 p)
+        public readonly FractionalHex CoordsToHex(Vector3 p)
         {
             var m = Orientation;
-            var pt = new Vector2((p.x - Origin.x) / Size.x, (p.y - Origin.y) / Size.y);
+            var pt = new Vector2((p.x - Origin.x) / Size.x, (p.z - Origin.z) / Size.y);
             var q = m.Inverse[0, 0] * pt.x + m.Inverse[0, 1] * pt.y;
             var r = m.Inverse[1, 0] * pt.x + m.Inverse[1, 1] * pt.y;
             return new FractionalHex(q, r);
@@ -310,14 +310,14 @@ namespace Hexes
             return Orientation.StartAngle * 60;
         }
 
-        public readonly List<Vector3> PolygonCorners(HexCoordinates h, float scale = 1)
+        public readonly List<Vector3> PolygonCorners(HexCoordinates h, float scale = 1, float elevation = 0)
         {
             var corners = new List<Vector3>();
-            var center = HexToLocalCoords2D(h);
+            var center = HexToLocalCoords(h, elevation);
             for (var i = 0; i < 6; i++)
             {
                 var offset = HexCornerOffset(i);
-                corners.Add(new Vector3(center.x + offset.x * scale, 0, center.y + offset.y * scale));
+                corners.Add(new Vector3(center.x + offset.x * scale, center.y, center.z + offset.y * scale));
             }
 
             return corners;

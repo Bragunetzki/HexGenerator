@@ -8,6 +8,7 @@ namespace WorldMapDisplay
         public Color[] colors;
         public PlaneHexMapDrawer hexDrawer;
         private Color _activeColor;
+        private int _activeElevation;
 
         private void Awake () {
             SelectColor(0);
@@ -24,14 +25,26 @@ namespace WorldMapDisplay
             if (UnityEngine.Camera.main is null) return;
             var inputRay = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(inputRay, out hit)) {
-                hexDrawer.ColorCell(hit.point, _activeColor);
+            if (Physics.Raycast(inputRay, out hit))
+            {
+                EditCell(hexDrawer.GetCell(hit.point));
             }
+        }
+
+        private void EditCell (HexCell cell)
+        {
+            cell.color = _activeColor;
+            cell.Elevation = _activeElevation;
+            hexDrawer.Refresh();
         }
 
         public void SelectColor(int index)
         {
             _activeColor = colors[index];
+        }
+        
+        public void SetElevation (float elevation) {
+            _activeElevation = (int)elevation;
         }
     }
 }

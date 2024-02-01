@@ -338,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &276409076
 GameObject:
@@ -632,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &603870100
 GameObject:
@@ -922,6 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &790147267 stripped
 Transform:
@@ -1379,6 +1382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1006179306
 GameObject:
@@ -1563,6 +1567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1182903237
 GameObject:
@@ -1608,6 +1613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1213263479
 GameObject:
@@ -1653,6 +1659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1251134844
 GameObject:
@@ -2419,6 +2426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1683017823
 GameObject:
@@ -2532,6 +2540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c23af7f5b8e4520a48b803c401a9b96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiRect: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &1818745659
 GameObject:
@@ -2855,6 +2864,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1228005375793441063, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1228005375793441063, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3759016897195617948, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
+      propertyPath: m_MaxValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4883484228584827233, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
       propertyPath: hexDrawer
       value: 
@@ -2862,6 +2883,14 @@ PrefabInstance:
     - target: {fileID: 5337544426652633325, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
       propertyPath: m_Name
       value: Hex Map Editor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065426385683347813, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7065426385683347813, guid: d60ccd1672c66bd4fae180db54bb8ba8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

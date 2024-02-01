@@ -63,7 +63,7 @@ namespace WorldGeneration
                     var gridOrigin = grid.Origin;
                     var noise2DCoordinates = new Vector2(gridOrigin.x + x * hexSize.x / hexNoiseResolution,
                         gridOrigin.z + y * hexSize.y / hexNoiseResolution);
-                    var hexCoords = grid.HexLayout.CoordsToHex(noise2DCoordinates).HexRound();
+                    var hexCoords = grid.HexLayout.CoordsToHex(new Vector3(noise2DCoordinates.x, 0, noise2DCoordinates.y)).HexRound();
 
                     // accumulate the heights.
                     if (!hexHeights.ContainsKey(hexCoords))
